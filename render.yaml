@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: chariow-ai-bot-v3
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: CHARIOW_API_KEY
+        sync: false
+      - key: CHARIOW_BASE_URL
+        value: https://api.chariow.com/v1
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_BASE_URL
+        value: https://api.openai.com/v1
+      - key: AI_MODEL
+        sync: false
